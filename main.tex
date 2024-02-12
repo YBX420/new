@@ -9,11 +9,18 @@
 \usepackage{appendix}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
+\usepackage{pythonhighlight}
 \usepackage{graphicx}
 \usepackage{mathtools,amssymb,lipsum,caption}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{cuted}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{framed}
+\usepackage[listings,skins]{tcolorbox}
+\usepackage[skipbelow=\topskip,skipabove=\topskip]{mdframed}
+\mdfsetup{roundcorner=0}
 \setlength\stripsep{3pt plus 1pt minus 1pt}
 \setcounter{secnumdepth}{5}
 \title{Solid Mechanics Report}
@@ -182,7 +189,7 @@
             \end{aligned}
         \end{equation}
     \section{Results}
-        \subsection{Combination of Result Equations}
+        \subsection{Result Calculation}
             The purpose of this experiment is to compute the horizontal distance to the location of the second bounce $d_t$ from the lower end of the tube, where $d_t = d_2 + d_3$. Thus, the equation for $d_t$ is:
             \begin{equation}\label{d_t}
                 \begin{aligned}
@@ -190,8 +197,6 @@
                     &= v_rcos\theta \Big(\frac{-v_rsin\theta\pm(1+2e)\sqrt{{v^2_{r}sin^2\theta}+2gh_2})}{g}\Big)
                 \end{aligned}
             \end{equation}
-
-        \subsection{Calculation of  Result}
             The parameters provided are shown in the table. With the given equation $h_1 = lsin\theta$, it can be determined that $h_1 = lsin40^\circ$.
             \begin{table}[H]
                 \caption {Given Parameters} \label{parameters} 
@@ -210,11 +215,34 @@
                 \end{center}
             \end{table}
             After the substitution of  $v_r = \sqrt{\frac{10gh_1}{7}}$, $h_1 = lsin40^\circ$ and given parameters, the value of $d_t$ can be determined:
-            \begin{align*}
-                d_t &= 1.839649m = 183.965cm
-            \end{align*}
-
-       
+            $$d_t = 1.839649037156224m = 184cm$$  
+            Considering there is a deviation of $\pm 0.0142$ for the value of the coefficient of restitution $e$, two more values of $d_t$ are considered:
+            \begin{align}
+                &d_{t_{upper}} = 1.8754782758273496m = 188cm \nonumber\\
+                &d_{t_{lower}} = 1.8038197984850983m = 180cm \nonumber
+            \end{align}
+            Thus, the final predicted $d_t$ is:
+            \begin{equation}
+                d_t = 184 \pm 4cm 
+            \end{equation}
+    \subsection{Errors and Sensitive analysis}
+    In addition to the given deviation of the coefficient of restitution $e$, other errors in the data may also lead to deviations in the final result. The purpose of this section is to analyse the impact of different values on the final result. The following table shows the parameters in which deviation might occur. These values will be assumed by a predicted deviation, and the final result will be computed.
+    \begin{table}[H]
+                \caption {Perdicted Deviation} \label{tb:deviation} 
+                \begin{center}
+                    \begin{tabular}{cc}
+                        \hline
+                        Parameter & Value contains deviation \\
+                        \hline
+                        $\theta$     & $40\pm0.1^ \circ$     \\
+                        $l$         & $1.500\pm 0.001m$     \\
+                        $e$         & $0.4979 \pm 0.0142$     \\
+                        $h_2$        & $0.70\pm0.01m$     \\
+                        \hline
+                    \end{tabular}
+                \end{center}
+            \end{table}
+    To calculate more efficiently, a programme is coded (see appendix\ref{ad:code}).
             
 \section{Discussion}
     \subsection{Type of rotation of the metal ball}
@@ -286,86 +314,155 @@ In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$
 \appendix
 \section{Appendices}
     \subsection{Proof of rolling without slipping occurs on a smooth slope} \label{proofofslide}
-The proof can be done by using the figure below:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{no_friction.png}
-    \caption{Simplified force analysis of the sphere on the smooth slope}
-    \label{frictionless}
-\end{figure}
-In figure \ref{frictionless}, $F_N$ is the normal force acting on the slope, $F_W$ is the weight of the sphere, and $F_D$ is the component of gravity in the direction of the slope.
-By the formula of torque:
-\begin{equation}
-    \tau = rFsin\theta
-\end{equation}
-There will be a torque $\tau$ equal to $F_dr$, which represents that the overall torque of the sphere is non-equilibrium. Thus, the sphere will \textbf{rotate}.
+        The proof can be done by using the figure below:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{no_friction.png}
+            \caption{Simplified force analysis of the sphere on the smooth slope}
+            \label{frictionless}
+        \end{figure}
+        In figure \ref{frictionless}, $F_N$ is the normal force acting on the slope, $F_W$ is the weight of the sphere, and $F_D$ is the component of gravity in the direction of the slope.
+        By the formula of torque:
+        \begin{equation}
+            \tau = rFsin\theta
+        \end{equation}
+        There will be a torque $\tau$ equal to $F_dr$, which represents that the overall torque of the sphere is non-equilibrium. Thus, the sphere will \textbf{rotate}.
     \subsection{Derivation of Friction Required for Rolling Without Slipping} \label{deriviationofmu}
-    This section shows how to derive the equation \ref{Friction Required for Rolling Without Slipping}.
-    \begin{equation} 
-    \begin{aligned} 
-        \Sigma F = F_D - F_R = mgsin\theta - \mu\cdot mgcos\theta = ma\\
-        \label{eq:user}
-    \end{aligned}
-\end{equation}
-It is given that the acceleration of a sphere rolling down an incline is:
-\begin{equation}
-    a_{sphere} = \frac{5}{7}gsin\theta
-\end{equation}
-Thus the minimum coefficient of static friction of the sphere to satisfy rolling without slipping could be determined as:
-\begin{equation}
-    \begin{aligned}
-        mgsin\theta - \mu \cdot mgcos\theta &= m\frac{5}{7}gsin\theta\\
-        sin\theta - \mu\cdot cos\theta &= \frac{5}{7}sin\theta\\
-        \mu &= \frac{2}{7}tan\theta\\
-        \theta &= arctan(\frac{7}{2}\mu)\\
-    \end{aligned}
-\end{equation}
+            This section shows how to derive the equation \ref{Friction Required for Rolling Without Slipping}.
+            \begin{equation} 
+            \begin{aligned} 
+                \Sigma F = F_D - F_R = mgsin\theta - \mu\cdot mgcos\theta = ma\\
+                \label{eq:user}
+            \end{aligned}
+        \end{equation}
+        It is given that the acceleration of a sphere rolling down an incline is:
+        \begin{equation}
+            a_{sphere} = \frac{5}{7}gsin\theta
+        \end{equation}
+        Thus the minimum coefficient of static friction of the sphere to satisfy rolling without slipping could be determined as:
+        \begin{equation}
+            \begin{aligned}
+                mgsin\theta - \mu \cdot mgcos\theta &= m\frac{5}{7}gsin\theta\\
+                sin\theta - \mu\cdot cos\theta &= \frac{5}{7}sin\theta\\
+                \mu &= \frac{2}{7}tan\theta\\
+                \theta &= arctan(\frac{7}{2}\mu)\\
+            \end{aligned}
+        \end{equation}
 
+    \subsection{Programme for computation of errors}\label{ad:code}
+    \begin{python}
+import numpy as np
+theta = [40-0.1,40,40+0.1]
+m = 0.008
+h_2 = [0.7-0.01,0.7,0.7+0.01]
+l = [1.500-0.001,1.500,1.500+0.001]
+g = 9.81
+e = [0.4979-0.0142,
+    0.4979,0.4979+0.0142]
+d = 0.0125
+r = d/2
+results = []
+
+def get_vr(theta,l):
+    h = l*np.sin(np.deg2rad(theta))
+    vr = np.sqrt(10*g*h/7)
+    vx = vr*np.cos(np.deg2rad(theta))
+    vy = vr*np.sin(np.deg2rad(theta))
+    return vr,vx,vy
+    
+def get_t(theta,h_2,l):
+    a = 0.5*g
+    b = get_vr(theta,l)[2]
+    c = -h_2
+    t_1,t_2 = np.roots([a,b,c])
+    if t_1 > 0 and t_2 > 0:
+        return min(t_1,t_2)
+    elif t_1 < 0 and t_2 < 0:
+        raise ValueError
+    else:
+        return max(t_1,t_2)
+        
+def get_d2(theta,h_2,l):
+    t = get_t(theta,h_2,l)
+    vr = get_vr(theta,l)[1]
+    d2 = t*vr
+    return d2
+    
+def get_d3(theta,h_2,e,l):
+    vry = get_vr(theta,l)[2]
+    t = get_t(theta,h_2,l)
+    vcy = vry + t
+    vcy_ = e * vcy
+    Tp = vcy_ * 2 / g
+    d_3 = get_vr(theta,l)[1] * Tp
+    return d_3 + get_d2(theta,h_2,l)
+    
+def output(i,j,k,u):
+    print("For theta = ",theta[i],
+          "; h_2 = ",h_2[j],
+          "; e = ",e[k],
+          "; l = ",l[u],
+          "; the value of d_t is"
+          ,end=' ')
+    result = get_d3(theta=theta[i],
+                    h_2=h_2[j],
+                    e=e[k],
+                    l=l[u])
+    results.append(result)
+    print(result)
+    
+for i in range(3):
+        for j in range(3):
+            for k in range(3):
+                for u in range(3):
+                    output(i,j,k,u)
+    \end{python}
     \subsection{Derivation of air resistance}\label{derviair}
-\subsubsection{Horizontal Component}
-For the horizontal component:
-\begin{equation}
-    \begin{aligned}
-        &m\frac{dv_x}{dt}= -bv_x\\
-        &-\frac{b}{m}dt = \frac{1}{v_x}dv_x\\
-        &-\frac{b}{m}t+c = ln |v_x|\\
-        &v_x = e^{-\frac{b}{m}t}\cdot e^c = C_1e^{-\frac{bt}{m}}
-    \end{aligned}
-\end{equation}
-It is given that when $t = 0$, $v_{0_x} = v_0cos\theta$, so:
-$$C_1 = V_0cos\theta$$
-Thus
-\begin{equation} \label{x_air}
-    v_x = v_0cos\theta \cdot e^{-\frac{b}{m}t}
-\end{equation}
-\subsubsection{Vertical Component}
-For the vertical component:
-\begin{equation}
-    \begin{aligned}
-        m\frac{dv_y}{dt} &= mg-bv_y\\
-        \int \frac{m}{mg-bv_y}dv_y &= \int dt\\
-        -t + c &= \frac{m}{b}ln|mg-bv_y| \\
-        e^{-\frac{tb}{m} + \frac{cb}{m}} &= mg-bv_y\\
-        C_2\cdot e^{-\frac{tb}{m}} &= mg-bv_y\\
-    \end{aligned}
-\end{equation}
-It is given that when $t = 0$, $v_{0_y} = v_0sin\theta$, so:
-$$C_2 = mg-bv_0sin\theta$$
-Thus
-$$(mg-bv_0sin\theta)\cdot e^{\frac{tb}{m}}(mg-bv_0sin\theta) = mg-bv_y$$
-so:
-\begin{equation} \label{y_air}
-    v_y = \frac{mg}{b}-e^{-\frac{tb}{m}}(\frac{mg}{b}-v_0sin\theta)
-\end{equation}
-\subsubsection{Conclusion}
-Thus, the horizontal component and the vertical component of the velocity can be written as:
-\begin{equation*}
-    \begin{cases}
-    v_x = v_0cos\theta\cdot e^{-\frac{bt}{m}}\\
-    v_y = \frac{mg}{b} - e^{-\frac{tb}{m}}(\frac{mg}{b}-v_osin\theta)
-    \end{cases}
-\end{equation*}
-
+        \subsubsection{Horizontal Component}
+        For the horizontal component:
+        \begin{equation}
+            \begin{aligned}
+                &m\frac{dv_x}{dt}= -bv_x\\
+                &-\frac{b}{m}dt = \frac{1}{v_x}dv_x\\
+                &-\frac{b}{m}t+c = ln |v_x|\\
+                &v_x = e^{-\frac{b}{m}t}\cdot e^c = C_1e^{-\frac{bt}{m}}
+            \end{aligned}
+        \end{equation}
+        It is given that when $t = 0$, $v_{0_x} = v_0cos\theta$, so:
+        $$C_1 = V_0cos\theta$$
+        Thus
+        \begin{equation} \label{x_air}
+            v_x = v_0cos\theta \cdot e^{-\frac{b}{m}t}
+        \end{equation}
+        \subsubsection{Vertical Component}
+        For the vertical component:
+        \begin{equation}
+            \begin{aligned}
+                m\frac{dv_y}{dt} &= mg-bv_y\\
+                \int \frac{m}{mg-bv_y}dv_y &= \int dt\\
+                -t + c &= \frac{m}{b}ln|mg-bv_y| \\
+                e^{-\frac{tb}{m} + \frac{cb}{m}} &= mg-bv_y\\
+                C_2\cdot e^{-\frac{tb}{m}} &= mg-bv_y\\
+            \end{aligned}
+        \end{equation}
+        It is given that when $t = 0$, $v_{0_y} = v_0sin\theta$, so:
+        $$C_2 = mg-bv_0sin\theta$$
+        Thus
+        $$(mg-bv_0sin\theta)\cdot e^{\frac{tb}{m}}(mg-bv_0sin\theta) = mg-bv_y$$
+        so:
+        \begin{equation} \label{y_air}
+            v_y = \frac{mg}{b}-e^{-\frac{tb}{m}}(\frac{mg}{b}-v_0sin\theta)
+        \end{equation}
+        \subsubsection{Results}
+        Thus, the horizontal component and the vertical component of the velocity can be written as:
+        \begin{equation*}
+            \begin{cases}
+            v_x = v_0cos\theta\cdot e^{-\frac{bt}{m}}\\
+            v_y = \frac{mg}{b} - e^{-\frac{tb}{m}}(\frac{mg}{b}-v_osin\theta)
+            \end{cases}
+        \end{equation*}
+        
+        
 \section{Reference}
 \printbibliography
 
