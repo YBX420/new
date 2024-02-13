@@ -352,18 +352,27 @@ In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$
     \subsection{Programme for computation of errors}\label{ad:code}
     \begin{python}
 import numpy as np
-theta = [40-0.1,40,40+0.1]
+"""
+Declare all the variables
+and consider some of their
+deviation
+"""
+theta = [40-0.1,40,40+0.1] 
 m = 0.008
 h_2 = [0.7-0.01,0.7,0.7+0.01]
-l = [1.500-0.001,1.500,1.500+0.001]
+l = [1.500-0.001,1.500,1.500+0.001] 
 g = 9.81
 e = [0.4979-0.0142,
-    0.4979,0.4979+0.0142]
+    0.4979,0.4979+0.0142] 
 d = 0.0125
 r = d/2
 results = []
 
 def get_vr(theta,l):
+"""
+Calculate the value of vr and return
+its joining force and two components
+"""
     h = l*np.sin(np.deg2rad(theta))
     vr = np.sqrt(10*g*h/7)
     vx = vr*np.cos(np.deg2rad(theta))
@@ -371,6 +380,11 @@ def get_vr(theta,l):
     return vr,vx,vy
     
 def get_t(theta,h_2,l):
+"""
+Calculate the value of t
+during the free fall.
+Ignore the non-possible values.
+"""
     a = 0.5*g
     b = get_vr(theta,l)[2]
     c = -h_2
@@ -383,12 +397,22 @@ def get_t(theta,h_2,l):
         return max(t_1,t_2)
         
 def get_d2(theta,h_2,l):
+"""
+Calculate the value of d2
+using the first two functions
+"""
     t = get_t(theta,h_2,l)
     vr = get_vr(theta,l)[1]
     d2 = t*vr
     return d2
     
-def get_d3(theta,h_2,e,l):
+def get_dt(theta,h_2,e,l):
+"""
+Calculate the value of d_3
+by the former functions and 
+return d_3 + d_2, which is 
+d_t
+"""
     vry = get_vr(theta,l)[2]
     t = get_t(theta,h_2,l)
     vcy = vry + t
@@ -398,13 +422,17 @@ def get_d3(theta,h_2,e,l):
     return d_3 + get_d2(theta,h_2,l)
     
 def output(i,j,k,u):
+"""
+Output all the values with
+appropriate description.
+"""
     print("For theta = ",theta[i],
           "; h_2 = ",h_2[j],
           "; e = ",e[k],
           "; l = ",l[u],
           "; the value of d_t is"
           ,end=' ')
-    result = get_d3(theta=theta[i],
+    result = get_dt(theta=theta[i],
                     h_2=h_2[j],
                     e=e[k],
                     l=l[u])
@@ -412,6 +440,9 @@ def output(i,j,k,u):
     print(result)
     
 for i in range(3):
+"""
+main function for output
+"""
         for j in range(3):
             for k in range(3):
                 for u in range(3):
@@ -423,7 +454,7 @@ for i in range(3):
         \begin{equation}
             \begin{aligned}
                 &m\frac{dv_x}{dt}= -bv_x\\
-                &-\frac{b}{m}dt = \frac{1}{v_x}dv_x\\
+                &\int-\frac{b}{m}dt = \int\frac{1}{v_x}dv_x\\
                 &-\frac{b}{m}t+c = ln |v_x|\\
                 &v_x = e^{-\frac{b}{m}t}\cdot e^c = C_1e^{-\frac{bt}{m}}
             \end{aligned}
