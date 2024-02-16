@@ -11,7 +11,7 @@
 \usepackage{algorithmic}
 \usepackage{pythonhighlight}
 \usepackage{graphicx}
-\usepackage{mathtools,amssymb,lipsum,caption}
+\usepackage{mathtools,amssymb,lipsum, caption}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{cuted}
@@ -37,7 +37,7 @@
 \begin{abstract}
     This document is a model and instructions for \LaTeX.
     This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-    or Math in Paper Title or Abstract.
+    or Math in Paper titles or abstracts.
 \end{abstract}
 
 \section{Introduction}
@@ -96,13 +96,14 @@
         \begin{equation}\label{vr}
             v_r = \sqrt{\frac{10gh_1}{7}}
         \end{equation}
-    
+        \subsubsection{Assumption effect}
+            All the assumptions are based on the fact that there is no other energy lost. Thus the assumption will cause a higher predicted value of $v_r$ and larger than the actual value.
     \subsection{Free Fall}
     In the second section, the value of $d_2$ is determined by using the SUVAT equations and several assumptions.
         \subsubsection{Assumptions}
             \begin{itemize}
                 \item The air resistance is negligible
-                \item There is no rotational motion during the free fall.
+                \item There is no additional rotational motion during the free fall.
                 \item There is no external force acting on the system.
                 \item The gravitational acceleration constant is $9.81 Nkg^{-1}$.
             \end{itemize}
@@ -133,6 +134,8 @@
                         \\ &= \frac{v_rcos\theta \cdot (-v_{r}sin\theta\pm\sqrt{{v^2_{r}sin^2\theta}+2gh_2})}{g}
                     \end{aligned}
                 \end{equation}
+        \subsubsection{Assumption effect}
+        The air resistance and rotational motion will cause external energy lost to the system. Thus the final $v_y$ and $v_x$ values will be smaller than the expected value.
     \subsection{First and Second Bounce}
         In the third section, the value of $d_3$ is determined using the SUVAT equations, Newton's law of restitution, and several assumptions.
         \subsubsection{Assumptions}
@@ -188,6 +191,8 @@
                 &=  \frac{\pm2ev_rcos\theta\sqrt{{v^2_{r}sin^2\theta}+2gh_2}}{g}
             \end{aligned}
         \end{equation}
+        \subsubsection{Assumption effect}
+            All the assumptions are based on there is no external energy lost. However, it is hard to determine if there is an energy transfer from rotational kinetic energy to horizontal linear kinetic energy during the collision. Thus, it is hard to determine if the actual value of $d_3$ is larger or smaller than the expected value.
     \section{Results}
         \subsection{Result Calculation}
             The purpose of this experiment is to compute the horizontal distance to the location of the second bounce $d_t$ from the lower end of the tube, where $d_t = d_2 + d_3$. Thus, the equation for $d_t$ is:
@@ -223,10 +228,12 @@
             \end{align}
             Thus, the final predicted $d_t$ is:
             \begin{equation}
-                d_t = 184 \pm 4cm 
+                d_t = 184 \pm 4cm \label{ans:1}
             \end{equation}
+    \subsubsection{Assumption Effect}
+    According to the previous discussion, the predicted value of $d_2$ will be larger than the calculated value, but the value of $d_3$ is difficult to judge. Therefore the overall predicted value of $d_t$ will be lower than the calculated value.
     \subsection{Errors and Sensitive analysis}
-    In addition to the given deviation of the coefficient of restitution $e$, other errors in the data may also lead to deviations in the final result. The purpose of this section is to analyse the impact of different values on the final result. The following table shows the parameters in which deviation might occur. These values will be assumed by a predicted deviation, and the final result will be computed.
+    In addition to the given deviation of the coefficient of restitution $e$, other errors in the data may also lead to deviations in the final result. The purpose of this section is to analyse the impact of different values on the final result. The following table shows the parameters in which deviation might occur. A predicted deviation will assume these values and the final result will be computed.
     \begin{table}[H]
                 \caption {Perdicted Deviation} \label{tb:deviation} 
                 \begin{center}
@@ -242,14 +249,17 @@
                     \end{tabular}
                 \end{center}
             \end{table}
-    To calculate more efficiently, a programme is coded (see appendix\ref{ad:code}). The code generates 81 results and eventually plotted a graph:
+    To calculate more efficiently, a program is coded (see appendix \ref{ad:code}).
+    The calculated difference between the maximum and the minimum value is $0.09974425189644576$. So the final range of the predicted value of $d_t$ is:
+    $$d_t = 183.965\pm9.974cm$$
+    This value is slightly larger than the predicted answer in equation \ref{ans:1}. For further analysis, a graph is plotted by the 81 results generated by the code. 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{code_output.png}
         \caption{the output of the code}
         \label{fig:code_output}
     \end{figure}
-    In this plot, each of the three values ([0, 1, 2], [3, 4, 5]...) represents the impact of the error of $l$ on the data for the same $\theta$,$h_2$ and $e$. Every third number among each of the six values ([0, 3, 6], [1, 4, 7]...) represents the impact of the error of $e$ on the data for the same $\theta$,$h_2$ and $l$. Every third number among each of the nine values ([0, 9, 18], [1, 10, 19]...) represents the impact of the error of $h_2$ on the data for the same $\theta$,$l$ and $e$. Finally, every third number among each of the 27 values ([0, 27, 54], [1, 28, 55]...) represents the impact of the error of $\theta$ on the data for the same $e$,$h_2$ and $l$. The standard deviation of the whole data calculated is \textbf{0.03107009868988036}.\newline
+    In this plot, each of the three values ([0, 1, 2], [3, 4, 5]...) represents the impact of the error of $l$ on the data for the same $\theta$,$h_2$ and $e$. Every third number among each of the six values ([0, 3, 6], [1, 4, 7]...) represents the impact of the error of $e$ on the data for the same $\theta$,$h_2$ and $l$. Every third number among each of the nine values ([0, 9, 18], [1, 10, 19]...) represents the impact of the error of $h_2$ on the data for the same $\theta$,$l$ and $e$. Finally, every third number among each of the 27 values ([0, 27, 54], [1, 28, 55]...) represents the impact of the error of $\theta$ on the data for the same $e$,$h_2$ and $l$.The standard deviation of the whole data calculated is \textbf{0.03107009868988036}.\newline
     Thus, another code shown in Appendix \ref{code:p_error} is made for calculating the average percentage error. This can help determine which parameter affects the final value of $d_t$ most. With the output data, a table can be made:
     
     \begin{table}[H]
@@ -268,34 +278,41 @@
         \end{center}
     \end{table}
     It shows that the value of $e$ affects the $d_t$ most, where $\theta$'s percentage uncertainty is approximately zero. 
-    
+\section{Experiment Result}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{experiment result.png}
+        \caption{Experiment Result}
+        \label{simplevr}
+    \end{figure}
 \section{Discussion}
     \subsection{Type of rotation of the metal ball}
-Three occasions might occur:
-\begin{itemize}
-    \item Rolling without slipping
-    \item Slipping
-    \item Skidding
-\end{itemize}
-The first section of the ball can be seen as a ball on the slope, as shown below in Figure \ref{simplevr}, where $F_N$ is the normal force given by the slope, $f_s$ is the rolling friction force of the sphere, $F_G$ is the weight of the sphere, and $F_D$ is the component of gravity in the direction of the slope.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{simplized_rolling_resistance.png}
-    \caption{Simplified force analysis of the sphere}
-    \label{simplevr}
-\end{figure}
-Through this figure, we can derive the equation about the coefficient of static friction $\mu_{sphere}$ and the angle $\theta$ to satisfy rolling without slipping. It can be used to determine the maximum $\theta$ that can achieve rolling without slipping:
-\begin{equation}\label{Friction Required for Rolling Without Slipping}
-\begin{aligned}
-    \theta = arctan(\frac{7}{2}\mu)
-\end{aligned}
-\end{equation}
-It is given that the maximum coefficient of static friction between the given material of stainless steel sphere and PVC tube $\mu$ is $0.53$ \cite{MechGuru}. By the equation \ref{Friction Required for Rolling Without Slipping}, the maximum angle $\theta$ can be computed:
-\begin{equation}
-    \theta_{max} = arctan(\frac{7}{2}\times0.53) = 61.671^\circ
-\end{equation}
-It is given that $\theta$ for this experiment is $40\circ$, which is smaller than the calculated maximum value. Thus, the rotation status of the sphere could be determined as rolling without slipping, which means the assumption is \textbf{correct}.
-
+        Three occasions might occur:
+        \begin{itemize}
+            \item Rolling without slipping
+            \item Slipping
+            \item Skidding
+        \end{itemize}
+        The first section of the ball can be seen as a ball on the slope, as shown below in Figure \ref{simplevr}, where $F_N$ is the normal force given by the slope, $f_s$ is the rolling friction force of the sphere, $F_G$ is the weight of the sphere, and $F_D$ is the component of gravity in the direction of the slope.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{simplized_rolling_resistance.png}
+            \caption{Simplified force analysis of the sphere}
+            \label{simplevr}
+        \end{figure}
+        Through this figure, we can derive the equation about the coefficient of static friction $\mu_{sphere}$ and the angle $\theta$ to satisfy rolling without slipping. It can be used to determine the maximum $\theta$ that can achieve rolling without slipping:
+        \begin{equation}\label{Friction Required for Rolling Without Slipping}
+        \begin{aligned}
+            \theta = arctan(\frac{7}{2}\mu)
+        \end{aligned}
+        \end{equation}
+        It is given that the maximum coefficient of static friction between the given material of stainless steel sphere and PVC tube $\mu$ is $0.53$ \cite{MechGuru}. By the equation \ref{Friction Required for Rolling Without Slipping}, the maximum angle $\theta$ can be computed:
+        \begin{equation}
+            \theta_{max} = arctan(\frac{7}{2}\times0.53) = 61.671^\circ
+        \end{equation}
+        It is given that $\theta$ for this experiment is $40\circ$, which is smaller than the calculated maximum value. Thus, the rotation status of the sphere could be determined as rolling without slipping, which means the assumption is \textbf{correct}.
+    
+    
     \subsection{Air Resistance during free fall}
 During the free fall section, the sphere is at a relatively slow speed where there is turbulence, so the air resistance can be determined by the equation:
 \begin{equation}
@@ -329,11 +346,11 @@ Since the sphere is a relatively small object moving slowly through a viscous fl
 Thus these can be determined as
 \begin{equation*}
    \begin{cases}
-       v_x = v_0 cos\theta\cdot e^{-\frac{6\pi\eta r}{m}}\\
+       v_x = v_0 cos\theta\cdot e^{-\frac{6\pi\eta tr}{m}}\\
        v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta)
    \end{cases} 
 \end{equation*}
-In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$
+In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$.
 
 \newpage
 \appendix
@@ -468,7 +485,7 @@ def output(i,j,k,u):
 def print_graph():
     """
     plot a graph to determine which
-    parameter affects the most
+    the parameter affects the most
     """
     import seaborn as sns
     import matplotlib.pyplot as plt
