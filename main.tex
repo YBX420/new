@@ -1,5 +1,4 @@
-\documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
+\documentclass{article}
 \usepackage{geometry}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{titlesec}
@@ -34,12 +33,8 @@
 \begin{document}
 
 \maketitle
-\begin{abstract}
-    This document is a model and instructions for \LaTeX.
-    This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-    or Math in Paper titles or abstracts.
-\end{abstract}
 
+\newpage
 \section{Introduction}
         According to the assumptions, there is no energy lost during the projectile motion between the first and the second bounces. It can therefore be assumed that the vertical component of the ball's velocity before the second bounce is the same size but opposite in direction as the vertical component of the velocity after the first bounce. Thus, by using the SUVAT equation $v = u + at$, the time $t_p = (T_p - T_c)\times2 $ during the bounces can be determined as:
 \begin{figure}[H]
@@ -48,7 +43,7 @@
     \caption{Game Setup}
     \label{fig:game_setup}
 \end{figure}
-
+\newpage
 \section{Methods}
     The total game setup can be separated into three sections:
     \begin{itemize}
@@ -193,8 +188,8 @@
         \end{equation}
         \subsubsection{Assumption effect}
             All the assumptions are based on there is no external energy lost. However, it is hard to determine if there is an energy transfer from rotational kinetic energy to horizontal linear kinetic energy during the collision. Thus, it is hard to determine if the actual value of $d_3$ is larger or smaller than the expected value.
-    \section{Results}
-        \subsection{Result Calculation}
+\section{Results}
+    \subsection{Result Calculation}
             The purpose of this experiment is to compute the horizontal distance to the location of the second bounce $d_t$ from the lower end of the tube, where $d_t = d_2 + d_3$. Thus, the equation for $d_t$ is:
             \begin{equation}\label{d_t}
                 \begin{aligned}
@@ -259,8 +254,8 @@
         \caption{the output of the code}
         \label{fig:code_output}
     \end{figure}
-    In this plot, each of the three values ([0, 1, 2], [3, 4, 5]...) represents the impact of the error of $l$ on the data for the same $\theta$,$h_2$ and $e$. Every third number among each of the six values ([0, 3, 6], [1, 4, 7]...) represents the impact of the error of $e$ on the data for the same $\theta$,$h_2$ and $l$. Every third number among each of the nine values ([0, 9, 18], [1, 10, 19]...) represents the impact of the error of $h_2$ on the data for the same $\theta$,$l$ and $e$. Finally, every third number among each of the 27 values ([0, 27, 54], [1, 28, 55]...) represents the impact of the error of $\theta$ on the data for the same $e$,$h_2$ and $l$.The standard deviation of the whole data calculated is \textbf{0.03107009868988036}.\newline
-    Thus, another code shown in Appendix \ref{code:p_error} is made for calculating the average percentage error. This can help determine which parameter affects the final value of $d_t$ most. With the output data, a table can be made:
+    In this plot, each of the three values ([0, 1, 2], [3, 4, 5]...) represents the impact of the error of $l$ on the data for the same $\theta$,$h_2$ and $e$. Every third number among each of the six values ([0, 3, 6], [1, 4, 7]...) represents the impact of the error of $e$ on the data for the same $\theta$,$h_2$ and $l$. Every third number among each of the nine values ([0, 9, 18], [1, 10, 19]...) represents the impact of the error of $h_2$ on the data for the same $\theta$,$l$ and $e$. Finally, every third number among each of the 27 values ([0, 27, 54], [1, 28, 55]...) represents the impact of the error of $\theta$ on the data for the same $e$,$h_2$ and $l$.The standard deviation of the whole data calculated is \textbf{0.03107009868988036}.\par
+    Another code shown in Appendix \ref{code:p_error} is made for calculating the average percentage error. This can help determine which parameter affects the final value of $d_t$ most. With the output data, a table can be made:
     
     \begin{table}[H]
         \caption {Average Percentage Error} \label{tb:a_p_e} 
@@ -278,13 +273,46 @@
         \end{center}
     \end{table}
     It shows that the value of $e$ affects the $d_t$ most, where $\theta$'s percentage uncertainty is approximately zero. 
-\section{Experiment Result}
+\section{Section 2: Experiment}
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\linewidth]{experiment result.png}
         \caption{Experiment Result}
         \label{simplevr}
     \end{figure}
+    In the whole group of 5 people, each person conducted five experiments, and the ball landed on the A4 paper 8 times. The middle line of the paper is marked as $184cm$. The results of the experiment showed that out of 25 experiments, 7 times the ball that hit the A4 paper landed outside $-10cm$ from the line, and the remaining 18 times the ball landed outside $-15cm$ from the line. Among them, Dylan(DL) moved the paper forward $10cm$ in the last experiment because he found that the experimental results deviated too much from the expected value. The final result he measured was $165.5cm$.
+    The table below shows the experiment results of all members of our group and their calculations.
+    \begin{table}[H]
+    \scriptsize
+        \caption {Experiment result} \label{tb:e_result} 
+        \begin{center}
+            \begin{tabular}{ccccccc}
+                \hline
+                Name & 1st & 2nd & 3rd & 4th & 5th & Average \\
+                \hline
+                Salma(SE)       &$-$        &$-$        &$170.0$    &$-$        &$-$        &$170.0$        \\
+                Dylan(DL)       &$-$        &$-$        &$-$        &$-$        &$165.5$    &$165.5$        \\
+                Fredrick(FX)    &$-$        &$170.3$    &$-$        &$-$        &$-$        &$170.3$        \\
+                Steven(YBX)     &$172.5$    &$170.0$    &$170.8$    &$171.3$    &$-$        &$171.2$        \\
+                Hanxiu(ZHX)     &$-$        &$-$        &$170.25$   &$-$        &$-$        &$170.25$       \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+    The target error analysis for my result is:
+    \begin{table}[H]
+        \caption {Experiment result} \label{tb:e_result} 
+        \begin{center}
+            \begin{tabular}{ccccccc}
+                \hline
+                Name & 1st & 2nd & 3rd & 4th & 5th & Meidan \\
+                \hline
+                Steven(YBX) & $-1.3$   & $+1.2$  & $-0.4$   & $+0.1$ & $-$     & $+0.1$         \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+    Among all the data, only my experiment was successful 4 out of 5 times, while the other team members all made relatively large errors. However, it is worth mentioning that all valid experimental results are within Section C. Therefore, the experimental error is relatively small, with a standard deviation of $0.455$, but the experimental error is very different from the expected error.
 \section{Discussion}
     \subsection{Type of rotation of the metal ball}
         Three occasions might occur:
@@ -311,8 +339,8 @@
             \theta_{max} = arctan(\frac{7}{2}\times0.53) = 61.671^\circ
         \end{equation}
         It is given that $\theta$ for this experiment is $40\circ$, which is smaller than the calculated maximum value. Thus, the rotation status of the sphere could be determined as rolling without slipping, which means the assumption is \textbf{correct}.
-    
-    
+        
+        
     \subsection{Air Resistance during free fall}
 During the free fall section, the sphere is at a relatively slow speed where there is turbulence, so the air resistance can be determined by the equation:
 \begin{equation}
@@ -338,20 +366,32 @@ After derivation (see equation \ref{y_air} and equation \ref{x_air} in appendix 
     v_y = \frac{mg}{b} - e^{-\frac{tb}{m}}(\frac{mg}{b}-v_osin\theta)
     \end{cases}
 \end{equation*}
-
 Since the sphere is a relatively small object moving slowly through a viscous fluid, $b$ can be written as:
 \begin{equation}
-    b = 6\pi\eta r
+    b = 6\pi\eta r \nonumber
 \end{equation}
-Thus these can be determined as
-\begin{equation*}
+Thus, the equation set can be determined as
+\begin{equation}
    \begin{cases}
        v_x = v_0 cos\theta\cdot e^{-\frac{6\pi\eta tr}{m}}\\
        v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta)
    \end{cases} 
-\end{equation*}
-In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$.
-
+\end{equation}
+In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$, so $b = 2.1206\times 10^{-6}$. Substitute all the known parameters into the equation, and an equation set of $v_y$ and $v_x$ is set:
+\begin{equation}
+    \begin{cases}
+       v_x = 2.8159e^{-2.65\times10^{-4}t} \\
+       v_y = 3.7\times10^4t - e^{-2.65\times10^{-4}t}(3.7\times10^4-3.6759\times\sin{40^\circ}) \nonumber 
+    \end{cases}
+\end{equation}
+With the video recorded, $t$ is approximated to $0.211s$, which means:
+\begin{equation}
+   \begin{cases}
+       v_x = 2.8159e^{-2.65\times10^{-4}t} = 2.816 \\
+       v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta) = 4.324 
+   \end{cases} 
+\end{equation}
+The $v_x$ and $v_y$ values are only slightly 
 \newpage
 \appendix
 \section{Appendices}
