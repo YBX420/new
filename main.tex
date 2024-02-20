@@ -10,6 +10,7 @@
 \usepackage{algorithmic}
 \usepackage{pythonhighlight}
 \usepackage{graphicx}
+\usepackage{subfigure}
 \usepackage{mathtools,amssymb,lipsum, caption}
 \usepackage{textcomp}
 \usepackage{xcolor}
@@ -342,56 +343,71 @@
         
         
     \subsection{Air Resistance during free fall}
-During the free fall section, the sphere is at a relatively slow speed where there is turbulence, so the air resistance can be determined by the equation:
-\begin{equation}
-    F_d = -bv
-\end{equation}
-where:
-\begin{itemize}
-    \item $F_d$ is the air resistance
-    \item $b$ is the constant that depends on both the material properties of the object and fluid, as well as the geometry of the object, and
-    \item $v$ is the velocity
-\end{itemize}
-Due to Newton's Second law, a system of equations can be set:
-\begin{equation*}
-    \begin{cases}
-    m\frac{dv_x}{dt} = -bv_x\\
-    m\frac{dv_y}{dt} = mg-bv_y
-    \end{cases}
-\end{equation*}
-After derivation (see equation \ref{y_air} and equation \ref{x_air} in appendix \ref{derviair} ), the equation set can be written as:
-\begin{equation*}
-    \begin{cases}
-    v_x = v_0cos\theta\cdot e^{-\frac{bt}{m}}\\
-    v_y = \frac{mg}{b} - e^{-\frac{tb}{m}}(\frac{mg}{b}-v_osin\theta)
-    \end{cases}
-\end{equation*}
-Since the sphere is a relatively small object moving slowly through a viscous fluid, $b$ can be written as:
-\begin{equation}
-    b = 6\pi\eta r \nonumber
-\end{equation}
-Thus, the equation set can be determined as
-\begin{equation}
-   \begin{cases}
-       v_x = v_0 cos\theta\cdot e^{-\frac{6\pi\eta tr}{m}}\\
-       v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta)
-   \end{cases} 
-\end{equation}
-In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$, so $b = 2.1206\times 10^{-6}$. Substitute all the known parameters into the equation, and an equation set of $v_y$ and $v_x$ is set:
-\begin{equation}
-    \begin{cases}
-       v_x = 2.8159e^{-2.65\times10^{-4}t} \\
-       v_y = 3.7\times10^4t - e^{-2.65\times10^{-4}t}(3.7\times10^4-3.6759\times\sin{40^\circ}) \nonumber 
-    \end{cases}
-\end{equation}
-With the video recorded, $t$ is approximated to $0.211s$, which means:
-\begin{equation}
-   \begin{cases}
-       v_x = 2.8159e^{-2.65\times10^{-4}t} = 2.816 \\
-       v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta) = 4.324 
-   \end{cases} 
-\end{equation}
-The $v_x$ and $v_y$ values are only slightly 
+        During the free fall section, the sphere is at a relatively slow speed where there is turbulence, so the air resistance can be determined by the equation:
+        \begin{equation}
+            F_d = -bv
+        \end{equation}
+        where:
+        \begin{itemize}
+            \item $F_d$ is the air resistance
+            \item $b$ is the constant that depends on both the material properties of the object and fluid, as well as the geometry of the object, and
+            \item $v$ is the velocity
+        \end{itemize}
+        Due to Newton's Second law, a system of equations can be set:
+        \begin{equation*}
+            \begin{cases}
+            m\frac{dv_x}{dt} = -bv_x\\
+            m\frac{dv_y}{dt} = mg-bv_y
+            \end{cases}
+        \end{equation*}
+        After derivation (see equation \ref{y_air} and equation \ref{x_air} in appendix \ref{derviair} ), the equation set can be written as:
+        \begin{equation*}
+            \begin{cases}
+            v_x = v_0cos\theta\cdot e^{-\frac{bt}{m}}\\
+            v_y = \frac{mg}{b} - e^{-\frac{tb}{m}}(\frac{mg}{b}-v_osin\theta)
+            \end{cases}
+        \end{equation*}
+        Since the sphere is a relatively small object moving slowly through a viscous fluid, $b$ can be written as:
+        \begin{equation}
+            b = 6\pi\eta r \nonumber
+        \end{equation}
+        Thus, the equation set can be determined as
+        \begin{equation}
+           \begin{cases}
+               v_x = v_0 cos\theta\cdot e^{-\frac{6\pi\eta tr}{m}}\\
+               v_y = \frac{mg}{6\pi\eta r} - e^{-\frac{6t\pi\eta r}{m}}(\frac{mg}{6\pi\eta r}-v_osin\theta)
+           \end{cases} 
+        \end{equation}
+        In the air, the fluid viscosity is considered as $1.8\times10^{-5}kg/(ms^{-1})$, so $b = 2.1206\times 10^{-6}$. Substitute all the known parameters into the equation, and an equation set of $v_y$ and $v_x$ is set:
+        \begin{equation}
+            \begin{cases}
+               v_x = 2.8159e^{-2.65\times10^{-4}t} \\
+               v_y = 3.7\times10^4 - e^{-2.65\times10^{-4}t}(3.7\times10^4-3.6759\times\sin{40^\circ}) \nonumber 
+            \end{cases}
+        \end{equation}
+        With the two frames of the video\cite{youtube} recorded :
+        \begin{figure}[H]
+            \centering
+            \subfigure[Before Free Fall]{
+                \label{Before Free Fall}
+                \includegraphics[width=0.35\linewidth]{time_beofre_bounce.png}
+            }
+            \subfigure[Time of Collision]{
+                \label{Time of Collision}
+                \includegraphics[width=0.35\linewidth]{time_bounce.png}
+            }
+            \caption{Time used to free fall}
+        \end{figure}
+        $t$ is approximated to $0.19$, which means:
+        \begin{equation}
+           \begin{cases}
+               v_x = 2.8159e^{-2.65\times10^{-4}t} = 2.8158ms^{-1} \\
+               v_y = 3.7\times10^4 - e^{-2.65\times10^{-4}t}(3.7\times10^4-3.6759\times\sin{40^\circ}) = 4.2256ms^{-1} 
+           \end{cases} 
+        \end{equation}
+        The $v_x$ and $v_y$ values are only slightly smaller than the value calculated without consideration of air resistance, which is $2.8159$ and $4.3954$, respectively. Thus, consideration of air resistance \textbf{is not the main reason} for the huge errors in the experimental and predicted values.
+    \subsection{During the Bounce}
+         It is observed that during the collision, there will be a deformation on the floor. The change of shape of the floor will cause uncertainty about the velocity of the sphere. Since the sphere is made of steel, the deformation of it can be negligible. 
 \newpage
 \appendix
 \section{Appendices}
