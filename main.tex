@@ -23,8 +23,8 @@
 \mdfsetup{roundcorner=0}
 \setlength\stripsep{3pt plus 1pt minus 1pt}
 \setcounter{secnumdepth}{5}
-\title{Solid Mechanics Report}
-\author{boxuan ye}
+\title{Bouncer Challenge Lab Report}
+\author{Steven Ye CID: 02383865}
 \date{February 2024}
 \addbibresource{reference.bib}
 \geometry{margin=1in}
@@ -34,9 +34,10 @@
 \begin{document}
 
 \maketitle
-
 \newpage
-\section{Introduction}
+\tableofcontents
+\newpage
+\section{Section 1: Introduction}
         According to the assumptions, there is no energy lost during the projectile motion between the first and the second bounces. It can therefore be assumed that the vertical component of the sphere's velocity before the second bounce is the same size but opposite in direction as the vertical component of the velocity after the first bounce. Thus, by using the SUVAT equation $v = u + at$, the time $t_p = (T_p - T_c)\times2 $ during the bounces can be determined as:
 \begin{figure}[H]
     \centering
@@ -55,10 +56,19 @@
     These sections use the method of conservation of energy, SUVAT equations, coefficient of restitution, and friction to compute the theoretical value of the horizontal distance to the location of the second bounce $d_t$ from the lower end of the tube.
     
     \subsection{Sliding Down the Tube}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{down_pvc.png}
+        \caption{Sliding Down the Tube}
+        \label{fig:section1}
+    \end{figure}
         In the first section, the purpose is to determine the dropping velocity of the sphere $v_r$, which is the velocity where the sphere has just left the PVC tube. This could be computed by considering the following assumptions:
         \subsubsection{Assumptions}
             \begin{itemize}
-                \item There is no friction acting between the sphere and the tube.
+                \item There is friction acting between the sphere and the tube. 
+                    \begin{itemize}
+                        \item There must be friction so the sphere will rotate. For proof, see appendix \ref{ap:proofofslide}
+                    \end{itemize}
                 \item The sphere will roll without slipping.
                 \item The sphere's trajectory is a perfectly straight line down the tube.
                 \item The sphere will not vibrate in the tube.
@@ -95,6 +105,12 @@
         \subsubsection{Assumption effect}
             All the assumptions are based on the fact that there is no other energy lost. Thus the assumption will cause a higher predicted value of $v_r$ and larger than the actual value.
     \subsection{Free Fall}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.25\linewidth]{free_fall.png}
+        \caption{Free Fall}
+        \label{fig:free_fall}
+    \end{figure}
     In the second section, the value of $d_2$ is determined by using the SUVAT equations and several assumptions.
         \subsubsection{Assumptions}
             \begin{itemize}
@@ -133,6 +149,12 @@
         \subsubsection{Assumption effect}
         The air resistance and rotational motion will cause external energy lost to the system. Thus the final $v_y$ and $v_x$ values will be smaller than the expected value.
     \subsection{First and Second Bounce}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{bounce.png}
+        \caption{First and Second Bounce}
+        \label{fig:first_second_bounce}
+    \end{figure}
         In the third section, the value of $d_3$ is determined using the SUVAT equations, Newton's law of restitution, and several assumptions.
         \subsubsection{Assumptions}
             \begin{itemize}
@@ -215,7 +237,12 @@
                     \end{tabular}
                 \end{center}
             \end{table}
-            After the substitution of  $v_r = \sqrt{\frac{10gh_1}{7}}$, $h_1 = lsin40^\circ$ and given parameters, the value of $d_t$ can be determined:
+            After the substitution of  $v_r = \sqrt{\frac{10gh_1}{7}}$, $h_1 = lsin\theta$ and given parameters, the value of $d_t$ can be determined:
+            \begin{equation}
+                \begin{aligned}
+                    d_t = \sqrt{\frac{10glsin\theta}{7}}cos\theta \Big(\frac{-\sqrt{\frac{10glsin\theta}{7}}sin\theta\pm(1+2e)\sqrt{\frac{10glsin^3\theta}{7}+2gh_2})}{g}\Big)
+                \end{aligned}
+            \end{equation}
             $$d_t = 1.839649037156224m = 184cm$$  
             Considering there is a deviation of $\pm 0.0142$ for the value of the coefficient of restitution $e$, two more values of $d_t$ are considered:
             \begin{align}
@@ -245,10 +272,10 @@
                     \end{tabular}
                 \end{center}
             \end{table}
-    To calculate more efficiently, a program is coded (see appendix \ref{ad:code}).
+    To calculate more efficiently, a program is coded (see Appendix \ref{ap:main_code}).
     The calculated difference between the maximum and the minimum value is $0.09974425189644576$. So the final range of the predicted value of $d_t$ is:
-    $$d_t = 183.965\pm9.974cm$$
-    This value is slightly larger than the predicted answer in equation \ref{ans:1}. For further analysis, two graphs are plotted by the 81 results generated by the code. 
+    $$d_t = 183.965\pm4.987cm$$
+    This value is slightly larger than the predicted answer in equation \ref{ans:1}. For further analysis, two graphs are plotted by the 81 results generated by Python; see Appendices \ref{ap:3d_code} and \ref{ap:main_code}. 
     \begin{figure}[H]
         \centering
         \subfigure[3d code output]{
@@ -268,7 +295,7 @@
 
     The standard deviation of the whole data calculated is \textbf{0.03107009868988036}.\par
     
-    Another code shown in Appendix \ref{code:p_error} is made for calculating the average percentage error. This can help determine which parameter affects the final value of $d_t$ most. With the output data, a table can be made:
+    Another code shown in Appendix \ref{ap:p_error} is made for calculating the average percentage error. This can help determine which parameter affects the final value of $d_t$ most. With the output data, a table can be made:
     
     \begin{table}[H]
         \caption {Average Percentage Error} \label{tb:a_p_e} 
@@ -291,7 +318,7 @@
         \centering
         \includegraphics[width=1\linewidth]{experiment result.png}
         \caption{Experiment Result}
-        \label{simplevr}
+        \label{fig:result}
     \end{figure}
     In the whole group of 5 people, each person conducted five experiments, and the sphere landed on the A4 paper 8 times. The middle line of the paper is marked as $184cm$. The results of the experiment showed that out of 25 experiments, 7 times the sphere that hit the A4 paper landed outside $-10cm$ from the line, and the remaining 18 times the sphere landed outside $-15cm$ from the line. Among them, Dylan(DL) moved the paper forward $10cm$ in the last experiment because he found that the experimental results deviated too much from the expected value. The final result he measured was $165.5cm$.
     The table below shows the experiment results of all members of our group and their calculations. 
@@ -324,8 +351,24 @@
             \end{tabular}
         \end{center}
     \end{table}
-    Among all the data, only my experiment was successful 4 out of 5 times, while the other team members all made relatively large errors. However, it is worth mentioning that all valid experimental results are within Section C. Therefore, the experimental error is relatively small, with a standard deviation of $0.455$, but the experimental error is very different from the expected error.
+    Among all the data, only my experiment was successful 4 out of 5 times, while the other team members all made relatively large errors. However, it is worth mentioning that all valid experimental results are within Section C. Therefore, the experimental error is relatively small, with \textbf{a standard deviation of $0.907$}, with a increase of $0.87593$ to the predicted value, but the experimental error is very different from the expected error.
 \section{Discussion}
+    \subsection{Experiment Setup}
+    In the experimental setup. Four details need to be set:
+    \begin{itemize}
+        \item 1. Keep the angle at $40^\circ$.
+        \item 2. Measure the height between the bottom of the slope to the ground and set it to $70cm$.
+        \item 3. Put the centre of the paper to the distance where the predicted value is.
+        \item 4. Release the ball freely at the middle of the tube.
+    \end{itemize}
+    When observing the data of other groups, it was found that other groups often ignored the third step. As shown in the figure \ref{fig:wrong_setup}, the final value of $d_t$ will be larger than the value they get, since they have calcualated length $l$ twice.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.35\linewidth]{wrong_setup.png}
+        \caption{Wrong Setup by other groups}
+        \label{fig:wrong_setup}
+    \end{figure}
+    However, it is worth mentioning that by analyzing their data, the error they obtained from the predicted value was smaller than ours. This means that \textbf{they got a smaller error due to wrong experimental settings.}But this phenomenon does not explain why our group's answer errors and predicted values were so different. Thus, further discussions are needed.
     \subsection{Type of rotation of the metal sphere}
         Three occasions might occur:
         \begin{itemize}
@@ -354,7 +397,7 @@
         
         
     \subsection{Rolling down the tube}
-    From the video \cite{youtube} 10s-11s, it is clear that there is a sound of the sphere colliding in the pipe. This shows that the sphere has other motion modes besides rolling down the pipe. It indicates that additional energy is lost. Due to the unexpected collision, there will be more velocity lost in the y-axis. This change will indicate a longer $d_2$, since
+    From the video \cite{youtube} 10s-11s, it is clear that there is a sound of the sphere colliding in the pipe. This shows that the sphere has other motion modes besides rolling down the pipe. It indicates that additional energy is lost. Due to the unexpected collision, there will be more velocity lost in the y-axis. This change will indicate a longer $d_2$. This is due to $v_y$ being lower than expected, so $t$ will be smaller while $v_x$ remains constant. This means the final $d_t$ value will be \textbf{smaller} than expected.
     \subsection{Air Resistance during free fall}
         During the free fall section, the sphere is at a relatively slow speed where there is turbulence, so the air resistance can be determined by the equation:
         \begin{equation}
@@ -420,11 +463,23 @@
         \end{equation}
         The $v_x$ and $v_y$ values are only slightly smaller than the value calculated without consideration of air resistance, which is $2.8159$ and $4.3954$, respectively. Thus, consideration of air resistance \textbf{is not the main reason} for the huge errors in the experimental and predicted values.
     \subsection{During the Bounce}
-         It is observed that during the collision, there will be a deformation on the floor. The change of shape of the floor will cause uncertainty about the velocity of the sphere. Since the sphere is made of steel, the deformation of it can be negligible. 
+         It is observed that during the collision, there will be deformation on the floor (carpet). A graph is plotted to simulate the deformation of the carpet.
+         \begin{figure}[H]
+             \centering
+             \includegraphics[width=0.5\linewidth]{deformation_carpet.png}
+             \caption{deformation of carpet}
+             \label{fig:de-carpet}
+         \end{figure}
+         The change in the carpet is the change of the fibres on it, which will cause uncertainty about the sphere's velocity. The force $f$ from the fibre of the carpet will cause an external decrease in the velocity of both the x and y axes. It is supposed that a larger shooting angle ($\theta$) will cause a decrease in velocity since there will be more deformation in the carpet. What's more, the sphere is rotating, which causes more uncertainty in the rebound of the ball. Thus, it is suggested that the material of this floor affects the \textbf{most} the value of $d_t$.
+    \subsection{Parallel Movement}
+        In a perfect experiment, the ball is expected to land consistently along a straight line, given that no force components are acting on it other than those on the x and y axes. However, observations from the experiment indicate a rather random distribution of where the balls land. This suggests that throughout its journey, particularly during rolling within the PVC pipe, the ball undergoes significant changes in velocity, veering off in various directions.\par
+        During rolling, it is difficult to ensure that the release direction of the ball is completely perpendicular to the cross-section of the PVC. Therefore, the ball may develop velocity in directions other than vertical and horizontal. At the same time, the artificial placement of the ball can easily lead to initial velocity. Therefore, for improvement, there should be a machine-controlled release. This ensures the ball's direction and zero initial velocity.
+    \section{Conclusion}
+        The discrepancy between the observed outcomes of our experiment and the anticipated values is significant, with the success rate also being notably low. The primary cause behind this discrepancy is attributed to the need to incorporate additional computational factors. A key determinant is the alteration in velocity stemming from the carpet's deformation. This deformation impacts both the rolling and kinetic energies due to the carpet forming a slight incline and the extended duration of impact from the ball's collision, leading to further energy dissipation. Moreover, ensuring the ball's travel down the centre of the tube is critical, which may result in the ball moving in various directions owing to the lack of precision in its release. This introduces variability. Furthermore, as the ball exits the tube, its spin affects its trajectory, deviating from an ideal parabolic path and extending its landing distance. Repeated trials also show that the ball's launch angle changes with each use, necessitating adjustments to the apparatus after every student's attempt. Wind represents an uncontrollable variable in this experiment, with other environmental elements also potentially affecting the ball's path.
 \newpage
 \appendix
 \section{Appendices}
-    \subsection{Proof of rolling without slipping occurs on a smooth slope} \label{proofofslide}
+    \subsection{Proof of slipping doesn't occur on a slope} \label{ap:proofofslide}
         The proof can be done by using the figure below:
         \begin{figure}[H]
             \centering
@@ -435,9 +490,10 @@
         In figure \ref{frictionless}, $F_N$ is the normal force acting on the slope, $F_W$ is the weight of the sphere, and $F_D$ is the component of gravity in the direction of the slope.
         By the formula of torque:
         \begin{equation}
-            \tau = rFsin\theta
+            \tau = 0\times Fsin\theta
         \end{equation}
-        There will be a torque $\tau$ equal to $F_dr$, which represents that the overall torque of the sphere is non-equilibrium. Thus, the sphere will \textbf{rotate}.
+        There will be no torque $\tau$ equal to $F_dr$, which represents that the overall torque of the sphere is in equilibrium. Thus, the sphere will \textbf{never rotate}.
+
     \subsection{Derivation of Friction Required for Rolling Without Slipping} \label{deriviationofmu}
             This section shows how to derive the equation \ref{Friction Required for Rolling Without Slipping}.
             \begin{equation} 
@@ -461,8 +517,8 @@
         \end{equation}
 
     
-    \subsection{Programme for computation of errors}\label{ad:code}
-    \subsubsection{codes for $d_t$ values}
+    \subsection{Programme for computation of errors}\label{ap:code}
+    \subsubsection{codes for $d_t$ values}\label{ap:main_code}
     \begin{python}
 import numpy as np
 """
@@ -470,13 +526,13 @@ Declare all the variables
 and consider some of their
 deviation
 """
-theta = [40-0.1,40,40+0.1] 
+theta = [40-0.1,40,40+0.1]
 m = 0.008
 h_2 = [0.7-0.01,0.7,0.7+0.01]
-l = [1.500-0.001,1.500,1.500+0.001] 
+l = [1.500-0.001,1.500,1.500+0.001]
 g = 9.81
-e = [0.4979-0.0142,
-    0.4979,0.4979+0.0142] 
+e = [0.4979-0.0142,0.4979,
+        0.4979+0.0142]
 d = 0.0125
 r = d/2
 results = []
@@ -491,7 +547,7 @@ def get_vr(theta,l):
     vx = vr*np.cos(np.deg2rad(theta))
     vy = vr*np.sin(np.deg2rad(theta))
     return vr,vx,vy
-    
+
 def get_t(theta,h_2,l):
     """
     Calculate the value of t
@@ -508,17 +564,14 @@ def get_t(theta,h_2,l):
         raise ValueError
     else:
         return max(t_1,t_2)
-        
+
 def get_d2(theta,h_2,l):
     """
     Calculate the value of d2
     using the first two functions
     """
-    t = get_t(theta,h_2,l)
-    vr = get_vr(theta,l)[1]
-    d2 = t*vr
-    return d2
-    
+    return get_t(theta,h_2,l)*get_vr(theta,l)[1]
+
 def get_dt(theta,h_2,e,l):
     """
     Calculate the value of d_3
@@ -526,32 +579,36 @@ def get_dt(theta,h_2,e,l):
     return d_3 + d_2, which is 
     d_t
     """
-    vry = get_vr(theta,l)[2]
-    t = get_t(theta,h_2,l)
-    vcy = vry + gt
+    vcy = get_vr(theta,l)[2] + g*get_t(theta,h_2,l)
     vcy_ = e * vcy
     Tp = vcy_ * 2 / g
     d_3 = get_vr(theta,l)[1] * Tp
     return d_3 + get_d2(theta,h_2,l)
-    
-def output(i,j,k,u):
+
+def get_result(theta,h_2,e,l):
     """
     Output all the values with
     appropriate description.
     """
-    print("For theta = ",theta[i],
-          "; h_2 = ",h_2[j],
-          "; e = ",e[k],
-          "; l = ",l[u],
-          "; the value of d_t is"
-          ,end=' ')
-    result = get_dt(theta=theta[i],
-                    h_2=h_2[j],
-                    e=e[k],
-                    l=l[u])
-    results.append(result)
+    count = 0
+    for i in range(3):
+        for j in range(3):
+            for k in range(3):
+                for u in range(3):
+                    count += 1
+                    print(count," For $theta$ = ",theta[i],
+                            "; $h_2$ = ",h_2[j],
+                            "; $e$ = ",e[k],
+                            "; $l$ = ",l[u],
+                            "; the value of $d_t$ is",end=' ')
+                    result = get_dt(theta=theta[i],
+                                    h_2=h_2[j],
+                                    e=e[k],
+                                    l=l[u])
+                    results.append(result)
+    return results
 
-def print_graph():
+def print_graph(results):
     """
     plot a graph to determine which
     the parameter affects the most
@@ -561,54 +618,133 @@ def print_graph():
     import pandas as pd
     x = [x for x in range(len(results))]
     plt.plot(x, results)
+    plt.xlabel("Value of d_t")
+    plt.ylabel("Number of Calculation")
     plt.show()
 
-# main function for output     
-for i in range(3):
-    for j in range(3):
-        for k in range(3):
-            for u in range(3):
-                output(i,j,k,u)
-print_graph()
-print(np.std(results)
+get_result(theta,h_2,e,l)
+print_graph(results)
 
     \end{python}
-    \subsubsection{codes for percentage error}\label{code:p_error}
+    \subsubsection{3d graph}\label{ap:3d_code}
     \begin{python}
-"""
-Declaration of the list
-of percentage errors
-"""
-p_error_e = []
-p_error_theta = []
-p_error_l = []
-p_error_h_2 = []
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import solidmechanics as sima
+
+# Placeholder for generating combinations and corresponding dt values
+
+# Iterating through each combination of parameters
+           
+
+
+# Convert lists to numpy arrays for consistent data handling
+
+dt_list = []
+theta_list = []
+h2_list = []
+e_list = []
+l_list = []
+
+for theta in sima.theta:
+        for h2 in sima.h_2:
+            for e in sima.e:
+                for l in sima.l:
+                    dt = sima.get_d3(theta,h2,e,l)
+                    dt_list.append(dt)
+                    theta_list.append(theta)
+                    h2_list.append(h2)
+                    e_list.append(e)
+                    l_list.append(l)
+print(len(dt_list))
+theta_array = np.array(theta_list)
+h2_array = np.array(h2_list)
+e_array = np.array(e_list)
+dt_array = np.array(dt_list)
+l_array = np.array(l_list)
+
+# Normalize l values to use as size for the scatter plot points
+sizes = (l_array - min(l_array)) / (max(l_array) - min(l_array)) * 100  # Adjust the scaling factor as necessary
+
+# Create the 3D scatter plot
+fig = plt.figure(figsize=(12, 8))
+ax = fig.add_subplot(111, projection='3d')
+scatter = ax.scatter(theta_array, h2_array, dt_array, c=e_array, cmap='viridis', s=sizes)
+
+# Labeling the axes
+ax.set_xlabel('Launch Angle (theta)')
+ax.set_ylabel('Initial Height (h2)')
+ax.set_zlabel('Distance Traveled (dt)')
+
+# Add a color bar to indicate the scale of the coefficient of restitution 'e'
+color_bar = fig.colorbar(scatter, ax=ax)
+color_bar.set_label('Coefficient of Restitution (e)')
+
+plt.show()
+
+    \end{python}
+    \subsubsection{codes for percentage error}\label{ap:p_error}
+\begin{python}
+import numpy as np
 def p_error(a,b,c):
-"""
-calculation of percentage error
-"""
+    """
+    return the percentage error
+    """
     return abs(100*(a+c-b-b)/(2*b))
-for i in range(27):
-    p_error_l.append(p_error
-                    (results[i],
-                    results[i+1],
-                    results[i+2]))
-    p_error_e.append(p_error
-                    (results[i],
-                    results[i+3],
-                    results[i+6]))
-    p_error_h_2.append(p_error
-                       (results[i],
-                        results[i+9],
-                        results[i+18]))
-    p_error_theta.append(p_error
-                         (results[i],
-                          results[i+27],
-                          results[i+54]))
-print(sum(p_error_l)/len(p_error_l))
-print(sum(p_error_e)/len(p_error_e))   
-print(sum(p_error_h_2)/len(p_error_h_2))  
-print(sum(p_error_theta)/len(p_error_theta)) 
+
+def calculate_error(results):
+    """
+    calculate all the percentage error
+    and return all of them
+    """
+    p_error_e = []
+    p_error_theta = []
+    p_error_l = []
+    p_error_h_2 = []
+    for i in range(27):
+        p_error_l.append(p_error
+                        (results[i],
+                        results[i+1],
+                        results[i+2]))
+        p_error_e.append(p_error
+                        (results[i],
+                        results[i+3],
+                        results[i+6]))
+        p_error_h_2.append(p_error
+                        (results[i],
+                            results[i+9],
+                            results[i+18]))
+        p_error_theta.append(p_error
+                            (results[i],
+                            results[i+27],
+                            results[i+54]))
+    return p_error_e, p_error_theta,p_error_l,p_error_h_2
+
+
+
+
+p_error_e, p_error_theta,p_error_l,p_error_h_2 = calculate_error(results)
+a_p_error_l = sum(p_error_l)/len(p_error_l)
+a_p_error_e = sum(p_error_e)/len(p_error_e)
+a_p_error_h_2 = sum(p_error_h_2)/len(p_error_h_2)
+a_p_error_theta = sum(p_error_theta)/len(p_error_theta)
+
+"""
+print a table
+that is easy to read
+"""
+import pandas as pd
+table = [a_p_error_l,
+         a_p_error_e,
+         a_p_error_h_2, 
+         a_p_error_theta]
+df = pd.DataFrame(table, 
+                  columns = ['average percentage error'], 
+                  index=['l','e','h_2','theta'])
+print(df)
+print(np.std(results)
+    
     \end{python}
     \subsection{Derivation of air resistance}\label{derviair}
         \subsubsection{Horizontal Component}
